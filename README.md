@@ -10,4 +10,4 @@ The server is a TCP server runnning on port 7171 that will listen for the `get` 
 uv run server
 ```
 
-The cache folder is a 
+The cache folder is the client side terminal application for interacting with the KV cache server. Othjer

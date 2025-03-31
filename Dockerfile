@@ -1,30 +1,17 @@
-FROM debian:latest
+FROM python:3.12-slim
 
-# Set environment variables
-ENV DEBIAN_FRONTEND=noninteractive \
-    PYTHON_VERSION=3.12
+WORKDIR /app
 
-# Install required dependencies and Python 3.12
-RUN apt update && apt install -y \
-    curl \
-    ca-certificates \
-    software-properties-common \
-    && add-apt-repository ppa:deadsnakes/ppa \
-    && apt update && apt install -y \
-    python3.12 \
-    python3.12-venv \
-    python3.12-dev \
-    && rm -rf /var/lib/apt/lists/*
+COPY . .
 
-# Install uv
-RUN curl -fsSL https://astral.sh/uv/install.sh | sh
+RUN pip install uv
 
-# Set Python 3.12 as the default
-RUN update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.12 1
+# Explicitly create a virtual environment using uv
+RUN uv venv .venv
 
-# Verify installation
-RUN python3 --version && uv --version
-
+# Activate the virtual environment and install dependencies
 RUN uv pip install -r pyproject.toml
+
+EXPOSE 7171
 
 CMD ["uv", "run", "server"]
