@@ -1,0 +1,16 @@
+[project]
+name = "key_value_cache"
+version = "0.1.0"
+description = "Key value cache"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "aiohttp>=3.11.14",
+    "cachetools>=5.5.2",
+    "fastapi[standard]>=0.115.12",
+    "locust>=2.33.2",
+    "mmh3>=5.1.0",
+    "msgpack>=1.1.0",
+    "redis>=5.2.1",
+    "uvicorn>=0.34.0",
+]
